@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Silabaco.ViewModels"
+             x:Class="Silabaco.MainPage">
+
+    <ContentPage.BindingContext>
+        <vm:SyllabicIterator/>
+    </ContentPage.BindingContext>
+
+    <Grid BackgroundColor="WhiteSmoke"
+          RowDefinitions="1*,5*,4*">
+        
+        <Button HorizontalOptions="Fill"
+                VerticalOptions="Fill"
+                Command="{Binding ShootCommand}"
+                BackgroundColor="GhostWhite"
+                x:Name="backgroundButton"
+                Grid.RowSpan="2"/>
+
+        <Label FontSize="96"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               TextColor="DarkSlateGray"
+               FontAttributes="Bold"
+               x:Name="syllableView"
+               Grid.RowSpan="2"/>
+
+        <Image Source="rex.png" Opacity="0" x:Name="awardView"
+               Scale="0.5"
+               Grid.RowSpan="2"/>
+
+        <Grid HorizontalOptions="Center">
+            <RoundRectangle WidthRequest="{Binding Width, Source={Reference scoreView}, Mode=OneWay}"
+                            Fill="PaleGreen"
+                            CornerRadius="25"/>
+            <HorizontalStackLayout Margin="10" x:Name="scoreView">
+                <Image Source="egg.png" Opacity="0"/>
+                <Image Source="egg.png" Opacity="0"/>
+                <Image Source="egg.png" Opacity="0"/>
+                <Image Source="egg.png" Opacity="0"/>
+                <Image Source="egg.png" Opacity="0"/>
+            </HorizontalStackLayout>
+        </Grid>
+
+        <VerticalStackLayout HorizontalOptions="Center"
+                             VerticalOptions="Center"
+                             Grid.Row="2"
+                             Spacing="25">
+            <ImageButton Source="play.png"
+                     WidthRequest="72"
+                     HeightRequest="72"
+                     Command="{Binding StartCommand}"/>
+            <ImageButton Source="setting.png"
+                     WidthRequest="72"
+                     HeightRequest="72"
+                     Command="{Binding OpenSettingsCommand}"/>
+        </VerticalStackLayout>
+
+    </Grid>
+
+</ContentPage>

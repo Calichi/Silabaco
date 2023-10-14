@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Silabaco.ViewModels"
+             x:Class="Silabaco.Pages.Setting"
+             Title="Setting">
+
+    <ContentPage.BindingContext>
+        <vm:Settings/>
+    </ContentPage.BindingContext>
+    
+    <Grid RowDefinitions="7*,2*">
+        
+        <Grid HorizontalOptions="Center"
+              VerticalOptions="Center"
+              RowDefinitions="Auto,50,Auto">
+
+            <Grid.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="FontSize" Value="28"/>
+                    <Setter Property="Margin" Value="0,0,50,0"/>
+                    <Setter Property="FontAttributes" Value="Bold"/>
+                    <Setter Property="TextColor" Value="DimGray"/>
+                </Style>
+                <Style TargetType="VerticalStackLayout">
+                    <Setter Property="Padding" Value="10"/>
+                </Style>
+                <Style TargetType="Entry">
+                    <Setter Property="FontSize" Value="28"/>
+                </Style>
+            </Grid.Resources>
+
+            <Border>
+                <VerticalStackLayout>
+                    <Label Text="Consonante:"/>
+                    <Entry Text="{Binding Consonant, Mode=OneWayToSource}"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Grid.Row="2">
+                <VerticalStackLayout>
+                    <Label Text="Silaba correcta:"/>
+                    <Entry Text="{Binding CorrectSyllable, Mode=OneWayToSource}"/>
+                </VerticalStackLayout>
+            </Border>
+            
+        </Grid>
+
+        <ImageButton Source="play.png"
+                     Grid.Row="1"
+                     VerticalOptions="Center" HorizontalOptions="Center"
+                     WidthRequest="72" HeightRequest="72"
+                     Command="{Binding StartGameCommand}"/>
+
+    </Grid>
+</ContentPage>
