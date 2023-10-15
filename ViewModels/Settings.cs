@@ -15,6 +15,7 @@ public partial class Settings : ObservableRecipient, IParametersChange
     string consonant;
 
     [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(StartGameCommand))]
     string correctSyllable;
 
     [RelayCommand(CanExecute = nameof(CanStartGame))]
@@ -25,10 +26,19 @@ public partial class Settings : ObservableRecipient, IParametersChange
     }
 
     bool CanStartGame() {
+        return IsValidConsonant() && IsValidCorrectSyllable();
+              
+    }
+
+    bool IsValidCorrectSyllable() {
+        return !string.IsNullOrWhiteSpace(CorrectSyllable);
+    }
+
+    bool IsValidConsonant() {
         return !string.IsNullOrWhiteSpace(Consonant);
     }
 
-    public IEnumerator<string> Syllables { get; private set; }
+    public string[] Syllables { get; private set; }
 
     public IParametersChange Message => this;
 
@@ -37,6 +47,6 @@ public partial class Settings : ObservableRecipient, IParametersChange
         foreach(var _vowel in "aeiou") {
             list.Add($"{Consonant}{_vowel}");
         }
-        Syllables = list.GetEnumerator();
+        Syllables = list.ToArray();
     }
 }

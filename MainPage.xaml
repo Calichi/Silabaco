@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:Silabaco.ViewModels"
-             x:Class="Silabaco.MainPage">
+             x:Class="Silabaco.MainPage"
+             Title="Toca la silaba correcta">
 
     <ContentPage.BindingContext>
         <vm:SyllabicIterator/>
@@ -43,19 +44,34 @@
             </HorizontalStackLayout>
         </Grid>
 
-        <VerticalStackLayout HorizontalOptions="Center"
-                             VerticalOptions="Center"
-                             Grid.Row="2"
-                             Spacing="25">
+        <Grid HorizontalOptions="Center"
+              VerticalOptions="Center"
+              Grid.Row="2"
+              RowSpacing="25"
+              RowDefinitions="*,*">
+            
             <ImageButton Source="play.png"
+                         WidthRequest="72"
+                         HeightRequest="72"
+                         Command="{Binding StartGameCommand}"
+                         x:Name="playButton"
+                         ZIndex="1"/>
+            
+            <ImageButton Source="pause.png"
+                         WidthRequest="72"
+                         HeightRequest="72"
+                         Command="{Binding PauseGameCommand}"
+                         x:Name="pauseButton"
+                         Opacity="0"
+                         Scale="0.5"
+                         ZIndex="0"/>
+            
+            <ImageButton Source="settings.png"
                      WidthRequest="72"
                      HeightRequest="72"
-                     Command="{Binding StartCommand}"/>
-            <ImageButton Source="setting.png"
-                     WidthRequest="72"
-                     HeightRequest="72"
-                     Command="{Binding OpenSettingsCommand}"/>
-        </VerticalStackLayout>
+                     Command="{Binding OpenSettingsCommand}"
+                     Grid.Row="1"/>
+        </Grid>
 
     </Grid>
 

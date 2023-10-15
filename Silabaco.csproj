@@ -62,8 +62,9 @@
 	<ItemGroup>
 	  <MauiImage Include="Resources\Images\egg.svg" BaseSize="64,64" />
 	  <MauiImage Include="Resources\Images\rex.png" BaseSize="256,256" />
-    <MauiImage Include="Resources\Images\play.png" BaseSize="96,96" />
-    <MauiImage Include="Resources\Images\setting.png" BaseSize="96,96" />
+    <MauiImage Include="Resources\Images\play.svg" BaseSize="96,96" />
+    <MauiImage Include="Resources\Images\settings.svg" BaseSize="96,96" />
+    <MauiImage Include="Resources\Images\pause.svg" BaseSize="96,96" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -76,6 +77,10 @@
 	  <MauiXaml Update="Pages\Setting.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Models\View\" />
 	</ItemGroup>
 
 </Project>

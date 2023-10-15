@@ -10,7 +10,8 @@ public partial class MainPage : ContentPage, IRecipient<Messages.Shoot>,
                                 IRecipient<Messages.SyllableChange>,
                                 IRecipient<Messages.ScoreIncrease>,
                                 IRecipient<Messages.Win>,
-                                IRecipient<Messages.Start>
+                                IRecipient<Messages.Start>,
+                                IRecipient<Messages.ShowButton>
 {
     public MainPage()
     {
@@ -57,6 +58,31 @@ public partial class MainPage : ContentPage, IRecipient<Messages.Shoot>,
             HideEgg(3),
             HideEgg(4)
         );
+    }
+
+    public async void Receive(ShowButton message) {
+        var frontButton = playButton;
+        var backButton = pauseButton;
+
+        if(message.RequiredFunction == ShowButton.Function.Pause) {
+            frontButton = pauseButton;
+            backButton = playButton;
+        }
+
+        await MainThread.InvokeOnMainThreadAsync(() => {
+            backButton.ZIndex = 0;
+            frontButton.ZIndex = 1;
+        });
+
+        await Task.WhenAll(
+                backButton.FadeTo(0),
+                backButton.ScaleTo(0.5)
+              );
+
+        await Task.WhenAll(
+                frontButton.FadeTo(1),
+                frontButton.ScaleTo(1)
+              );
     }
 
     Task HideEgg(int index) {
